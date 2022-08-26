@@ -1,6 +1,16 @@
+spring:
+  application:
+    name: config-service
+  profiles:
+    active: dev, stage, prod
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/volalm15/app
+          search-paths: config/
 server:
-  port: 8081
-  config:
-    server:
-      git:
-        uri: https://github.com/spring-cloud-samples/config-repo
+  port: 8080
+management:
+  security:
+    enabled: false

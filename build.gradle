@@ -1,19 +1,13 @@
-plugins {
-    id 'java'
-}
-
 group 'org.vollify'
 version '1.0-SNAPSHOT'
 
-repositories {
-    mavenCentral()
-}
+allprojects {
+    repositories {
+        mavenCentral()
+        maven { url 'https://repo.spring.io/milestone' }
+        maven { url 'https://repo.spring.io/snapshot' }
+    }
 
-dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-}
-
-test {
-    useJUnitPlatform()
+    apply plugin: 'base'
+    apply plugin: 'idea'
 }
