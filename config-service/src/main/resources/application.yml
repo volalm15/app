@@ -4,7 +4,7 @@ spring:
   application:
     name: config-service
   profiles:
-    active: native
+    active: dev
   cloud:
     config:
       server:

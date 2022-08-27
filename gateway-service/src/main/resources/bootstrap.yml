@@ -4,5 +4,7 @@ spring:
   cloud:
     config:
       discovery:
-        enabled: 'true'
+        enabled: true
         serviceId: 'config-service'
+  profiles:
+    active: native
