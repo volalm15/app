@@ -7,7 +7,8 @@ pluginManagement {
 }
 rootProject.name = 'app'
 include ':discovery-service'
-include ':gateway-service'
+include ':edge-service'
 include ':config-service'
+include ':data-service'
 
 

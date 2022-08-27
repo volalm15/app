@@ -10,8 +10,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/config-service" />
+            <option value="$PROJECT_DIR$/data-service" />
             <option value="$PROJECT_DIR$/discovery-service" />
-            <option value="$PROJECT_DIR$/gateway-service" />
+            <option value="$PROJECT_DIR$/edge-service" />
           </set>
         </option>
       </GradleProjectSettings>

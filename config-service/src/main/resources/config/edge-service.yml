@@ -1,0 +1,15 @@
+server:
+  port: 8761
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

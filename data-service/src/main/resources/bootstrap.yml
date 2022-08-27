@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: data-service
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        serviceId: 'config-service'
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${DISCOVERY_SERVICE_URL:http://localhost:8760/eureka/}
+
