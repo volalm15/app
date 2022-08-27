@@ -6,5 +6,9 @@ spring:
       discovery:
         enabled: true
         serviceId: 'config-service'
-  profiles:
-    active: native
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8760/eureka/
+
