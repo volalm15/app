@@ -22,7 +22,6 @@ public class BookService {
     books.add(new Book("Lord of the Rings", LocalDate.of(1954, 8, 27)));
     books.add(new Book("The Hobbit", LocalDate.of(1937, 8, 27)));
     books.add(new Book("The Catcher in the Rye", LocalDate.of(1951, 8, 27)));
-
     return books;
   }
 

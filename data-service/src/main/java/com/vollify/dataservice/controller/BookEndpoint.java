@@ -20,5 +20,6 @@ public interface BookEndpoint {
 
   @GetMapping
   @ResponseStatus(HttpStatus.OK)
-  ResponseEntity<List<Book>> getBooks();
+  ResponseEntity<List<Book>> getBooks()
+    throws InterruptedException;
 }

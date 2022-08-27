@@ -26,9 +26,11 @@ public class BookController
   private BookService bookService;
 
   @Override
-  public ResponseEntity<List<Book>> getBooks() {
+  public ResponseEntity<List<Book>> getBooks()
+    throws InterruptedException {
     log.info("getBooks() called");
 
+    Thread.sleep(100000);
     return ResponseEntity.ok(bookService.getBooks());
   }
 

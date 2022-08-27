@@ -4,12 +4,22 @@ server:
 spring:
   cloud:
     gateway:
+      default-filters:
+        - name: Retry
+          args:
+            retries: 15
+            backoff:
+              firstBackoff: 50ms
+              maxBackoff: 500ms
       discovery:
         locator:
           enabled: true
+          lowerCaseServiceId: true
 
 management:
   endpoints:
+    gateway:
+      enabled: true
     web:
       exposure:
         include: '*'
