@@ -1,16 +1,31 @@
+server:
+  port: 8888
 spring:
   application:
     name: config-service
   profiles:
-    active: dev, stage, prod
+    active: native
   cloud:
     config:
       server:
+        native:
+          search-locations:
+            - classpath:/config
         git:
           uri: https://github.com/volalm15/app
-          search-paths: config/
-server:
-  port: 8080
-management:
-  security:
-    enabled: false
+          repos:
+            development:
+              pattern:
+                - '*/dev'
+                - '*/stage'
+              uri: https://github.com/volalm15/app
+              searchPaths:
+                - 'config/'
+            production:
+              pattern:
+                - '*/prod'
+              uri: https://github.com/volalm15/app
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8080/eureka/
