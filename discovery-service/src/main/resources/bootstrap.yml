@@ -1,9 +1,24 @@
+server:
+  port: 8760
+
 spring:
   application:
     name: discovery-service
-  cloud:
-    config:
-      fail-fast: false
-      retry:
-        max-attempts: 100
-      uri: ${CONFIG_SERVICE_URL:http://localhost:8888}
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'

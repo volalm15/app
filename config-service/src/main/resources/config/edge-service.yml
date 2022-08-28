@@ -17,6 +17,9 @@ spring:
           lowerCaseServiceId: true
 
 management:
+  endpoint:
+    shutdown:
+      enabled: true
   endpoints:
     gateway:
       enabled: true

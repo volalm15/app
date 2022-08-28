@@ -8,10 +8,13 @@ spring:
         serviceId: 'config-service'
       fail-fast: false
       retry:
-        max-attempts: 100
+        max-attempts: ${CONFIG_SERVICE_MAX_ATTEMPTS:20}
 
 eureka:
   client:
     serviceUrl:
       defaultZone: ${DISCOVERY_SERVICE_URL:http://localhost:8760/eureka/}
-
+  instance:
+    lease-expiration-duration-in-seconds: 3
+    lease-renewal-interval-in-seconds: 1
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.name}:${random.value}
