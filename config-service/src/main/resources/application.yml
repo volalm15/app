@@ -4,7 +4,7 @@ spring:
   application:
     name: config-service
   profiles:
-    active: native
+    active: ${APP_PROFILE:native}
   cloud:
     config:
       server:
@@ -24,13 +24,15 @@ spring:
               pattern:
                 - '*/prod'
               uri: https://github.com/volalm15/app
+              searchPaths:
+                - 'config/'
 eureka:
   client:
     serviceUrl:
       defaultZone: ${DISCOVERY_SERVICE_URL:http://localhost:8760/eureka/}
   instance:
-    lease-expiration-duration-in-seconds: 3
-    lease-renewal-interval-in-seconds: 1
+    lease-expiration-duration-in-seconds: ${DISCOVERY_LEASE_EXPIRATION:3}
+    lease-renewal-interval-in-seconds: ${DISCOVERY_LEASE_RENEWAL:1}
     instance-id: ${spring.cloud.client.hostname}:${spring.application.name}:${random.value}
 
 management:

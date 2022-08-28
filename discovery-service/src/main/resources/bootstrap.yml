@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: discovery-service
+  profiles:
+    active: ${APP_PROFILE:dev}
 
 eureka:
   instance:

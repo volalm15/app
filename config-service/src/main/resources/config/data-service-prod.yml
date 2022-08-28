@@ -1,0 +1,11 @@
+server:
+  port: 8732
+
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'

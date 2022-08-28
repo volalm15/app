@@ -1,20 +1,26 @@
 spring:
   application:
     name: edge-service
+  profiles:
+    active: ${APP_PROFILE:dev}
   cloud:
     config:
       discovery:
         enabled: true
         serviceId: 'config-service'
-      fail-fast: false
+      fail-fast: true
       retry:
         max-attempts: ${CONFIG_SERVICE_MAX_ATTEMPTS:20}
+        max-interval: ${CONFIG_SERVICE_MAX_INTERVALL:10000}
+        initial-interval: ${CONFIG_SERVICE_INITIAL_INTERVALL:3000}
+        multiplier: ${CONFIG_SERVICE_MULTIPLIER:1.3}
+
 
 eureka:
   client:
     serviceUrl:
       defaultZone: ${DISCOVERY_SERVICE_URL:http://localhost:8760/eureka/}
   instance:
-    lease-expiration-duration-in-seconds: 3
-    lease-renewal-interval-in-seconds: 1
+    lease-expiration-duration-in-seconds: ${DISCOVERY_LEASE_EXPIRATION:3}
+    lease-renewal-interval-in-seconds: ${DISCOVERY_LEASE_RENEWAL:1}
     instance-id: ${spring.cloud.client.hostname}:${spring.application.name}:${random.value}
