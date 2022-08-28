@@ -3,6 +3,7 @@ This is a playground for Spring Cloud. It is a simple web application that allow
 ## Available Environment Variables for deployment
 
 APP_PROFILE [default = 'dev' / exception config-service: 'native']
+HOST_NAME [default = 'localhost']
 
 ### Discovery Service
 - DISCOVERY_SERVICE_URL - [default = 'http://localhost:8760/eureka/']

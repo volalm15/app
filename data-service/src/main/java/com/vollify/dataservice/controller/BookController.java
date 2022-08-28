@@ -30,7 +30,6 @@ public class BookController
     throws InterruptedException {
     log.info("getBooks() called");
 
-    Thread.sleep(100000);
     return ResponseEntity.ok(bookService.getBooks());
   }
 
