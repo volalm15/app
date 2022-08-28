@@ -4,7 +4,7 @@ spring:
   application:
     name: config-service
   profiles:
-    active: dev
+    active: native
   cloud:
     config:
       server:
@@ -17,7 +17,6 @@ spring:
             development:
               pattern:
                 - '*/dev'
-                - '*/stage'
               uri: https://github.com/volalm15/app
               searchPaths:
                 - 'config/'
@@ -28,4 +27,10 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8080/eureka/
+      defaultZone: ${DISCOVERY_SERVICE_URL:http://localhost:8760/eureka/}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

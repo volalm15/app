@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: data-service
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        serviceId: 'config-service'
+      fail-fast: false
+      retry:
+        max-attempts: 100
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${DISCOVERY_SERVICE_URL:http://localhost:8760/eureka/}
+
