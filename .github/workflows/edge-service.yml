@@ -8,18 +8,18 @@ on:
     branches: [ main ]
     paths:
       - "edge-service/**"
-      
+
 permissions:
-  contents: read
-  
+  packages: write
+
 jobs:
   build:
-  
+
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -27,8 +27,23 @@ jobs:
           distribution: 'temurin'
 
       - name: Run gradle build
-        run: ./gradlew :edge-service:build
+        run: ./gradlew :edge-service:bootJar
 
-      - uses: actions/upload-artifact@v2
+      - name: Publish jar artifact
+        uses: actions/upload-artifact@v2
         with:
           path: edge-service/build/libs/*.jar
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build docker image
+        run: docker build --build-arg JAR_FILE=edge-service/build/libs/*.jar -t ghcr.io/volalm15/edge-service:latest -f edge-service/Dockerfile .
+
+      - name: Publish docker image
+        run: |
+          docker push ghcr.io/volalm15/edge-service:latest
