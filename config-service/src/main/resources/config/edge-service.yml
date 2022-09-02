@@ -12,7 +12,7 @@ spring:
       default-filters:
         - name: Retry
           args:
-            retries: 20
+            retries: 15
             backoff:
               firstBackoff: 50ms
               maxBackoff: 500ms
