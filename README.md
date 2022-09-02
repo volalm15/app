@@ -1,4 +1,4 @@
-# Spring Cloud Playground
+# Spring Cloud Playground [![Build config-service](https://github.com/volalm15/app/actions/workflows/config-service.yml/badge.svg)](https://github.com/volalm15/app/actions/workflows/config-service.yml)
 This is a playground for Spring Cloud. It is a simple web application that allows you to experiment with Spring Cloud features.
 ## How to use?
 ## Available Environment Variables for deployment
