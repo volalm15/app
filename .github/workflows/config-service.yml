@@ -34,4 +34,4 @@ jobs:
           path: config-service/build/libs/*.jar
       
       - name: Build docker image
-        run: docker build --build-arg JAR_FILE=build/libs/*.jar -t vollify/config-service .
+        run: docker build --build-arg JAR_FILE=build/libs/*.jar -t vollify/config-service -f config-service/Dockerfile .
