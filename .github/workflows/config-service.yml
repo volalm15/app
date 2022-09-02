@@ -27,8 +27,11 @@ jobs:
           distribution: 'temurin'
 
       - name: Run gradle build
-        run: ./gradlew :config-service:build
+        run: ./gradlew :config-service:bootJar
 
       - uses: actions/upload-artifact@v2
         with:
           path: config-service/build/libs/*.jar
+      
+      - name: Build docker image
+        run: docker build --build-arg JAR_FILE=build/libs/*.jar -t vollify/config-service .
