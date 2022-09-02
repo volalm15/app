@@ -10,7 +10,7 @@ on:
       - "config-service/**"
       
 permissions:
-  contents: read
+  packages: write
   
 jobs:
   build:
