@@ -30,7 +30,7 @@ jobs:
         run: ./gradlew :config-service:bootJar
 
       - name: Build docker image
-        run: docker build --build-arg JAR_FILE=build/libs/*.jar -t vollify/config-service -f config-service/Dockerfile .
+        run: docker build --build-arg JAR_FILE=config-service/build/libs/*.jar -t vollify/config-service -f config-service/Dockerfile .
         
       - uses: actions/upload-artifact@v2
         with:
