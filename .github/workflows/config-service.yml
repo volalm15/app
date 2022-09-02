@@ -28,6 +28,11 @@ jobs:
 
       - name: Run gradle build
         run: ./gradlew :config-service:bootJar
+
+      - name: Publish jar artifact
+        uses: actions/upload-artifact@v2
+        with:
+          path: config-service/build/libs/*.jar
         
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
@@ -37,12 +42,8 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build docker image
-        run: docker build --build-arg JAR_FILE=config-service/build/libs/*.jar -t ghcr.io/vollify/config-service:latest -f config-service/Dockerfile .
+        run: docker build --build-arg JAR_FILE=config-service/build/libs/*.jar -t ghcr.io/volalm15/config-service:latest -f config-service/Dockerfile .
         
-      - name: Build the hello-world Docker image
+      - name: Publish docker image
         run: |
-          docker push ghcr.io/vollify/config-service:latest
-          
-      - uses: actions/upload-artifact@v2
-        with:
-          path: config-service/build/libs/*.jar
+          docker push ghcr.io/volalm15/config-service:latest
