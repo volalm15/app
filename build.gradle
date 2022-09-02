@@ -1,4 +1,3 @@
-
 allprojects {
     repositories {
         mavenCentral()
@@ -7,4 +6,6 @@ allprojects {
 
     apply plugin: 'base'
     apply plugin: 'idea'
+
+    version = 'v1.1.0'
 }

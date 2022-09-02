@@ -5,7 +5,6 @@ plugins {
 }
 
 group = 'com.vollify.data-service'
-version = '1.0-SNAPSHOT'
 
 targetCompatibility = "$javaVersion"
 sourceCompatibility = "$javaVersion"
