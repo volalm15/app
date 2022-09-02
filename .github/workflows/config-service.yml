@@ -37,10 +37,11 @@ jobs:
           password: ${{ secrets.CR_PAT }}
 
       - name: Build docker image
-        run: docker build --build-arg JAR_FILE=config-service/build/libs/*.jar -t vollify/config-service:latest -f config-service/Dockerfile .
+        run: docker build --build-arg JAR_FILE=config-service/build/libs/*.jar -t ghcr.io/vollify/config-service:latest -f config-service/Dockerfile .
         
       - name: Build the hello-world Docker image
         run: |
+          docker run ghcr.io/vollify/config-service:latest
           docker push ghcr.io/vollify/config-service:latest
           
       - uses: actions/upload-artifact@v2
