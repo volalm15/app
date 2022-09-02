@@ -5,6 +5,9 @@ This is a playground for Spring Cloud. It is a simple web application that allow
 APP_PROFILE [default = 'dev' / exception config-service: 'native']
 HOST_NAME [default = 'localhost']
 
+### Edge Service
+- KEYCLOAK_URL - [default = 'http://localhost:8080']
+- KEYCLOAK_CLIENT_SECRET
 ### Discovery Service
 - DISCOVERY_SERVICE_URL - [default = 'http://localhost:8760/eureka/']
 - DISCOVERY_LEASE_RENEWAL - [default = 1]
@@ -15,3 +18,9 @@ HOST_NAME [default = 'localhost']
 - CONFIG_SERVICE_MAX_INTERVALL - [default = 10000]
 - CONFIG_SERVICE_INITIAL_INTERVALL - [default = 3000]
 - CONFIG_SERVICE_MULTIPLIER - [default = 1.3]
+
+### Keycloak Docker
+- KEYCLOAK_POSTGRES_USER
+- KEYCLOAK_POSTGRES_PASSWORD
+- KEYCLOAK_ADMIN_USER
+- KEYCLOAK_ADMIN_PASSWORD
