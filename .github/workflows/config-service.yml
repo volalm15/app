@@ -41,7 +41,6 @@ jobs:
         
       - name: Build the hello-world Docker image
         run: |
-          docker run ghcr.io/vollify/config-service:latest
           docker push ghcr.io/vollify/config-service:latest
           
       - uses: actions/upload-artifact@v2
