@@ -12,12 +12,15 @@ This is a playground for Spring Cloud. It is a simple web application that allow
 ## Available Environment Variables for deployment
 
 APP_PROFILE [default = 'dev' / exception config-service: 'native']
-HOST_NAME [default = 'localhost']
+
 
 ### ⚡Edge Service
 - KEYCLOAK_URL - [default = 'http://localhost:8080']
 - KEYCLOAK_CLIENT_SECRET
- Discovery Service
+- REDIS_URL - [default = 'localhost']
+- REDIS_PORT - [default = '6379']
+### Discovery Service
+- DISCOVERY_SERVICE_HOST_NAME = [default = 'localhost']
 - DISCOVERY_SERVICE_URL - [default = 'http://localhost:8760/eureka/']
 - DISCOVERY_LEASE_RENEWAL - [default = 1]
 - DISCOVERY_LEASE_EXPIRATION - [default = 3]
