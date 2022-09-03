@@ -13,12 +13,16 @@ services:
   config-service:
     image: ghcr.io/volalm15/config-service:latest
     container_name: config-service
+    env_file:
+      - prod.env
     networks:
       - backend
 
   discovery-service:
     image: ghcr.io/volalm15/discovery-service:latest
     container_name: discovery-service
+    env_file:
+      - prod.env
     networks:
       - backend
     ports:
@@ -27,6 +31,8 @@ services:
   edge-service:
     image: ghcr.io/volalm15/edge-service:latest
     container_name: edge-service
+    env_file:
+      - prod.env
     networks:
       - backend
     ports:
@@ -37,6 +43,8 @@ services:
 
   data-service:
     image: ghcr.io/volalm15/data-service:latest
+    env_file:
+      - prod.env
     networks:
       - backend
     ports:
@@ -48,6 +56,8 @@ services:
   redis:
     image: redis
     container_name: redis
+    env_file:
+      - prod.env
     networks:
       - backend
     ports:
@@ -56,6 +66,8 @@ services:
   postgres:
     image: postgres
     container_name: postgres
+    env_file:
+      - prod.env
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
@@ -66,8 +78,10 @@ services:
       POSTGRES_PASSWORD: ${KEYCLOAK_POSTGRES_PASSWORD}
 
   keycloak:
-    container_name: keycloak
     image: quay.io/keycloak/keycloak
+    container_name: keycloak
+    env_file:
+      - prod.env
     command: start-dev
     networks:
       - backend

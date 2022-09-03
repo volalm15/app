@@ -1,0 +1,46 @@
+server:
+  port: 8761
+
+spring:
+  session:
+    store-type: redis
+    redis:
+      host: ${REDIS_URL:localhost}
+      port: ${REDIS_PORT:6379}
+  cloud:
+    gateway:
+      default-filters:
+        - name: Retry
+          args:
+            retries: 15
+            backoff:
+              firstBackoff: 50ms
+              maxBackoff: 500ms
+        - name: TokenRelay
+
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
+
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: ${KEYCLOAK_URL:http://localhost:8080}/realms/edge-service-realm
+        registration:
+          keycloak:
+            clientId: ${spring.application.name}
+            clientSecret: ${KEYCLOAK_CLIENT_SECRET}
+            scope: openid
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+  endpoints:
+    gateway:
+      enabled: true
+    web:
+      exposure:
+        include: '*'
