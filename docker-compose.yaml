@@ -13,24 +13,28 @@ services:
   config-service:
     image: ghcr.io/volalm15/config-service:latest
     container_name: config-service
+    restart: unless-stopped
     env_file:
       - prod.env
     networks:
       - backend
+    ports:
+      - "8760:8760"
 
   discovery-service:
     image: ghcr.io/volalm15/discovery-service:latest
     container_name: discovery-service
+    restart: unless-stopped
     env_file:
       - prod.env
     networks:
       - backend
     ports:
       - "8888:8888"
-
   edge-service:
     image: ghcr.io/volalm15/edge-service:latest
     container_name: edge-service
+    restart: unless-stopped
     env_file:
       - prod.env
     networks:
@@ -43,6 +47,7 @@ services:
 
   data-service:
     image: ghcr.io/volalm15/data-service:latest
+    restart: unless-stopped
     env_file:
       - prod.env
     networks:
@@ -56,6 +61,7 @@ services:
   redis:
     image: redis
     container_name: redis
+    restart: unless-stopped
     env_file:
       - prod.env
     networks:
@@ -66,10 +72,12 @@ services:
   postgres:
     image: postgres
     container_name: postgres
+    restart: unless-stopped
     env_file:
       - prod.env
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./data:/docker-entrypoint-initdb.d
     networks:
       - backend
     environment:
@@ -80,6 +88,7 @@ services:
   keycloak:
     image: quay.io/keycloak/keycloak
     container_name: keycloak
+    restart: unless-stopped
     env_file:
       - prod.env
     command: start-dev
