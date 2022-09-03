@@ -19,13 +19,13 @@ spring:
                 - '*/dev'
               uri: https://github.com/volalm15/app
               searchPaths:
-                - 'configk/'
+                - 'config/'
             production:
               pattern:
                 - '*/prod'
               uri: https://github.com/volalm15/app
               searchPaths:
-                - 'config-xyz/'
+                - 'config/'
 eureka:
   client:
     serviceUrl:
