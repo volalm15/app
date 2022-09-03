@@ -25,7 +25,7 @@ spring:
                 - '*/prod'
               uri: https://github.com/volalm15/app
               searchPaths:
-                - 'config/'
+                - 'config-xyz/'
 eureka:
   client:
     serviceUrl:

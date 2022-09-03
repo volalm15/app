@@ -9,30 +9,33 @@
 ## How to use?
 This is a playground for Spring Cloud. It is a simple web application that allows you to experiment with Spring Cloud features.
 
-## Available Environment Variables for deployment
+## Available environment variables for deployment
+| Variable                         | Description                                 | Default value                                                | Service                      |
+|----------------------------------|---------------------------------------------|--------------------------------------------------------------|------------------------------|
+| APP_PROFILE                      | profile                                     | dev / native (=config service for fetching native config in default mode) | all                          |
+| ----------------------------     | -----------------------------------------   | --------------------------------------------------------------------------- | ---------------------------- |
+| KEYCLOAK_URL                     | url to keycloak instance                    | http://localhost:8080                                        | edge-service, data-service   |
+| KEYCLOAK_CLIENT_SECRET           | secret of keycloak client                   | -                                                            | edge-service                 |
+| KEYCLOAK_CLIENT_ID               | id of keycloak client                       | always spring.application.name                               | edge-service                 |
+| REDIS_URL                        | url for redis instance                      | localhost                                                    | edge-service                 |
+| REDIS_PORT                       | port for redis instance                     | 6379                                                         | edge-service                 |
+| ----------------------------     | -----------------------------------------   | --------------------------------------------------------------------------- | ---------------------------- |
+| DISCOVERY_SERVICE_HOST_NAME      | hostname for discovery service              | localhost                                                    | discovery-service            |
+| DISCOVERY_SERVICE_URL            | url for discovery service                   | http://localhost:8761/eureka                                 | all                          |
+| DISCOVERY_LEASE_RENEWAL          | lease renewal interval                      | 1                                                            | all                          |
+| DISCOVERY_LEASE_EXPIRATION       | lease expiration interval                   | 3                                                            | all                          |
+| ----------------------------     | -----------------------------------------   | --------------------------------------------------------------------------- | ---------------------------- |
+| CONFIG_SERVICE_MAX_ATTEMPTS      | max attempts for config service fetch       | 20                                                           | all                          |
+| CONFIG_SERVICE_MAX_INTERVALL     | max intervall for config service fetch      | 10000                                                        | all                          |
+| CONFIG_SERVICE_INITIAL_INTERVALL | initial intervall for config service fetch  | 3000                                                         | all                          |
+| CONFIG_SERVICE_MULTIPLIER        | multiplier for config service fetch         | 1.3                                                          | all                          |
 
-APP_PROFILE [default = 'dev' / exception config-service: 'native']
 
+### ⚡Docker Environment Instances
+| Variable                   | Description                             | Default value                                                             | Service                    |
+|----------------------------|-----------------------------------------|---------------------------------------------------------------------------|----------------------------|
+| KEYCLOAK_POSTGRES_USER     | postgres user for keycloak instance     | admin                                                                     | keycloak-instance          |
+| KEYCLOAK_POSTGRES_PASSWORD | postgres password for keycloak instance | changeit                                                                  | keycloak-instance          |
+| KEYCLOAK_ADMIN_USER        | default user for keycloak instance      | admin                                                                     | keycloak-instance          |
+| KEYCLOAK_ADMIN_PASSWORD    | default password for keycloak instance  | admin                                                                     | keycloak-instance          |
 
-### ⚡Edge Service
-- KEYCLOAK_URL - [default = 'http://localhost:8080']
-- KEYCLOAK_CLIENT_SECRET
-- REDIS_URL - [default = 'localhost']
-- REDIS_PORT - [default = '6379']
-### Discovery Service
-- DISCOVERY_SERVICE_HOST_NAME = [default = 'localhost']
-- DISCOVERY_SERVICE_URL - [default = 'http://localhost:8760/eureka/']
-- DISCOVERY_LEASE_RENEWAL - [default = 1]
-- DISCOVERY_LEASE_EXPIRATION - [default = 3]
-
- ### ⚡Config Service
-- CONFIG_SERVICE_MAX_ATTEMPTS - [default = 20]
-- CONFIG_SERVICE_MAX_INTERVALL - [default = 10000]
-- CONFIG_SERVICE_INITIAL_INTERVALL - [default = 3000]
-- CONFIG_SERVICE_MULTIPLIER - [default = 1.3]
-
-### ⚡Keycloak Docker
-- KEYCLOAK_POSTGRES_USER
-- KEYCLOAK_POSTGRES_PASSWORD
-- KEYCLOAK_ADMIN_USER
-- KEYCLOAK_ADMIN_PASSWORD
