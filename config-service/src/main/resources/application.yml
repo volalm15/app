@@ -13,19 +13,7 @@ spring:
             - classpath:/config
         git:
           uri: https://github.com/volalm15/app
-          repos:
-            dev:
-              pattern:
-                - '*/dev'
-              uri: https://github.com/volalm15/app
-              searchPaths:
-                - 'config/'
-            prod:
-              pattern:
-                - '*/prod'
-              uri: https://github.com/volalm15/app
-              searchPaths:
-                - 'config/'
+          search-paths: 'config/'
 eureka:
   client:
     serviceUrl:
