@@ -61,6 +61,7 @@ services:
   redis:
     image: redis
     container_name: redis
+    hostname: redis
     restart: unless-stopped
     env_file:
       - prod.env

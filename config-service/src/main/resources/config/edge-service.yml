@@ -34,6 +34,7 @@ spring:
             clientId: ${spring.application.name}
             clientSecret: ${KEYCLOAK_CLIENT_SECRET}
             scope: openid
+
 management:
   endpoint:
     shutdown:
