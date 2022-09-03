@@ -10,25 +10,25 @@
 This is a playground for Spring Cloud. It is a simple web application that allows you to experiment with Spring Cloud features.
 
 ## Available environment variables for deployment
-| Variable                         | Description                                 | Default value                                                | Service                      |
-|----------------------------------|---------------------------------------------|--------------------------------------------------------------|------------------------------|
-| APP_PROFILE                      | profile                                     | dev / native (=config service for fetching native config in default mode) | all                          |
-| ----------------------------     | -----------------------------------------   | --------------------------------------------------------------------------- | ---------------------------- |
-| KEYCLOAK_URL                     | url to keycloak instance                    | http://localhost:8080                                        | edge-service, data-service   |
-| KEYCLOAK_CLIENT_SECRET           | secret of keycloak client                   | -                                                            | edge-service                 |
-| KEYCLOAK_CLIENT_ID               | id of keycloak client                       | always spring.application.name                               | edge-service                 |
-| REDIS_URL                        | url for redis instance                      | localhost                                                    | edge-service                 |
-| REDIS_PORT                       | port for redis instance                     | 6379                                                         | edge-service                 |
-| ----------------------------     | -----------------------------------------   | --------------------------------------------------------------------------- | ---------------------------- |
-| DISCOVERY_SERVICE_HOST_NAME      | hostname for discovery service              | localhost                                                    | discovery-service            |
-| DISCOVERY_SERVICE_URL            | url for discovery service                   | http://localhost:8761/eureka                                 | all                          |
-| DISCOVERY_LEASE_RENEWAL          | lease renewal interval                      | 1                                                            | all                          |
-| DISCOVERY_LEASE_EXPIRATION       | lease expiration interval                   | 3                                                            | all                          |
-| ----------------------------     | -----------------------------------------   | --------------------------------------------------------------------------- | ---------------------------- |
-| CONFIG_SERVICE_MAX_ATTEMPTS      | max attempts for config service fetch       | 20                                                           | all                          |
-| CONFIG_SERVICE_MAX_INTERVALL     | max intervall for config service fetch      | 10000                                                        | all                          |
-| CONFIG_SERVICE_INITIAL_INTERVALL | initial intervall for config service fetch  | 3000                                                         | all                          |
-| CONFIG_SERVICE_MULTIPLIER        | multiplier for config service fetch         | 1.3                                                          | all                          |
+| Variable                         | Description                                | Default value                                                             | Service                    |
+|----------------------------------|--------------------------------------------|---------------------------------------------------------------------------|----------------------------|
+| APP_PROFILE                      | profile                                    | dev / native (=config service for fetching native config in default mode) | all                        |
+|                                  |                                            |                                                                           |                            |
+| KEYCLOAK_URL                     | url to keycloak instance                   | http://localhost:8080                                                     | edge-service, data-service |
+| KEYCLOAK_CLIENT_SECRET           | secret of keycloak client                  | -                                                                         | edge-service               |
+| KEYCLOAK_CLIENT_ID               | id of keycloak client                      | always spring.application.name                                            | edge-service               |
+| REDIS_URL                        | url for redis instance                     | localhost                                                                 | edge-service               |
+| REDIS_PORT                       | port for redis instance                    | 6379                                                                      | edge-service               |
+|                                  |                                            |                                                                           |                            |
+| DISCOVERY_SERVICE_HOST_NAME      | hostname for discovery service             | localhost                                                                 | discovery-service          |
+| DISCOVERY_SERVICE_URL            | url for discovery service                  | http://localhost:8761/eureka                                              | all                        |
+| DISCOVERY_LEASE_RENEWAL          | lease renewal interval                     | 1                                                                         | all                        |
+| DISCOVERY_LEASE_EXPIRATION       | lease expiration interval                  | 3                                                                         | all                        |
+|                                  |                                            |                                                                           |                            |
+| CONFIG_SERVICE_MAX_ATTEMPTS      | max attempts for config service fetch      | 20                                                                        | all                        |
+| CONFIG_SERVICE_MAX_INTERVALL     | max intervall for config service fetch     | 10000                                                                     | all                        |
+| CONFIG_SERVICE_INITIAL_INTERVALL | initial intervall for config service fetch | 3000                                                                      | all                        |
+| CONFIG_SERVICE_MULTIPLIER        | multiplier for config service fetch        | 1.3                                                                       | all                        |
 
 
 ### ⚡Docker Environment Instances

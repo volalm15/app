@@ -19,7 +19,7 @@ spring:
                 - '*/dev'
               uri: https://github.com/volalm15/app
               searchPaths:
-                - 'config/'
+                - 'configk/'
             production:
               pattern:
                 - '*/prod'
