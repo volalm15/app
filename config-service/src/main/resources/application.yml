@@ -14,13 +14,13 @@ spring:
         git:
           uri: https://github.com/volalm15/app
           repos:
-            development:
+            dev:
               pattern:
                 - '*/dev'
               uri: https://github.com/volalm15/app
               searchPaths:
                 - 'config/'
-            production:
+            prod:
               pattern:
                 - '*/prod'
               uri: https://github.com/volalm15/app
