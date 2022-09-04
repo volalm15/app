@@ -25,9 +25,9 @@ Don't forget to set the environment variables in the `prod.env` file. You can fi
 |----------------------------------|--------------------------------------------|---------------------------------------------------------------------------|----------------------------|
 | APP_PROFILE                      | profile                                    | dev / native (=config service for fetching native config in default mode) | all                        |
 | -                                |                                            |                                                                           |                            |
-| KEYCLOAK_URL                     | url to keycloak instance                   | http://localhost:8080                                                     | edge-service, data-service |
-| KEYCLOAK_CLIENT_SECRET           | secret of keycloak client                  | -                                                                         | edge-service               |
-| KEYCLOAK_CLIENT_ID               | id of keycloak client                      | always spring.application.name                                            | edge-service               |
+| OAUTH2_ISSUER_URI                | url to oauth2 instance                     | http://localhost:8080                                                     | edge-service, data-service |
+| OAUTH2_CLIENT_SECRET             | secret of oauth2 client                    | -                                                                         | edge-service               |
+| OAUTH2_CLIENT_ID                 | id of oauth2 client                        | always spring.application.name                                            | edge-service               |
 | REDIS_URL                        | url for redis instance                     | localhost                                                                 | edge-service               |
 | REDIS_PORT                       | port for redis instance                    | 6379                                                                      | edge-service               |
 | -                                |                                            |                                                                           |                            |
@@ -43,10 +43,3 @@ Don't forget to set the environment variables in the `prod.env` file. You can fi
 
 
 ### ⚡Docker Environment Instances
-| Variable                   | Description                             | Default value                                                             | Service                    |
-|----------------------------|-----------------------------------------|---------------------------------------------------------------------------|----------------------------|
-| KEYCLOAK_POSTGRES_USER     | postgres user for keycloak instance     | admin                                                                     | keycloak-instance          |
-| KEYCLOAK_POSTGRES_PASSWORD | postgres password for keycloak instance | changeit                                                                  | keycloak-instance          |
-| KEYCLOAK_ADMIN_USER        | default user for keycloak instance      | admin                                                                     | keycloak-instance          |
-| KEYCLOAK_ADMIN_PASSWORD    | default password for keycloak instance  | admin                                                                     | keycloak-instance          |
-
