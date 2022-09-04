@@ -34,8 +34,6 @@ spring:
         registration:
           auth0:
             provider: auth0
-            authorizationGrantType: authorization_code
-            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
             clientId: ${OAUTH2_CLIENT_ID}
             clientSecret: ${OAUTH2_CLIENT_SECRET}
             scope:
