@@ -58,9 +58,9 @@ services:
       mode: replicated
       replicas: 2
 
-  redis:
-    image: redis
-    container_name: redis
+  cache:
+    image: redis:latest
+    container_name: cache
     hostname: redis
     restart: unless-stopped
     env_file:
