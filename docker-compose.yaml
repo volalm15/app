@@ -61,7 +61,6 @@ services:
   redis:
     image: redis
     restart: unless-stopped
-    command: [ "redis-server", "--protected-mode", "no" ]
     env_file:
       - prod.env
     networks:
