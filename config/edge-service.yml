@@ -1,6 +1,7 @@
 server:
   port: 8761
 
+
 spring:
   session:
     store-type: redis
@@ -28,13 +29,18 @@ spring:
     oauth2:
       client:
         provider:
-          keycloak:
-            issuer-uri: ${KEYCLOAK_URL:http://localhost:8080}/realms/edge-service-realm
+          auth0:
+            issuer-uri: ${OAUTH2_ISSUER_URI}
+            audience: https://vollify.eu.auth0.com/api/v2/
         registration:
-          keycloak:
-            clientId: ${spring.application.name}
-            clientSecret: ${KEYCLOAK_CLIENT_SECRET}
-            scope: openid
+          auth0:
+            clientId: ${OAUTH2_CLIENT_ID}
+            clientSecret: ${OAUTH2_CLIENT_SECRET}
+            scope:
+              - openid
+              - profile
+              - email
+
 management:
   endpoint:
     shutdown:

@@ -20,7 +20,7 @@ After cloning the repository, you can run the application using the following co
 Don't forget to set the environment variables in the `prod.env` file. You can find the list of required variables in the `prod.env` example file.
 
 
-## Available environment variables for deployment
+## Available environment variables for deployment provided by microservices
 | Variable                         | Description                                | Default value                                                             | Service                    |
 |----------------------------------|--------------------------------------------|---------------------------------------------------------------------------|----------------------------|
 | APP_PROFILE                      | profile                                    | dev / native (=config service for fetching native config in default mode) | all                        |

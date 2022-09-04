@@ -6,7 +6,7 @@ spring:
     oauth2:
       resource-server:
         jwt:
-          issuer-uri: ${KEYCLOAK_URL:http://localhost:8080}/realms/edge-service-realm
+          issuer-uri: ${OAUTH2_ISSUER_URI}
 
 management:
   endpoint:
