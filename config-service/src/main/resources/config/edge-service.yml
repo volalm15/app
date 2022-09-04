@@ -29,12 +29,16 @@ spring:
       client:
         provider:
           keycloak:
-            issuer-uri: ${KEYCLOAK_URL:http://localhost:8080}/realms/edge-service-realm
+            issuer-uri: ${OAUTH2_ISSUER_URI}
         registration:
           keycloak:
-            clientId: ${spring.application.name}
-            clientSecret: ${KEYCLOAK_CLIENT_SECRET}
-            scope: openid
+            clientId: ${OAUTH2_CLIENT_ID}
+            clientSecret: ${OAUTH2_CLIENT_SECRET}
+            scope:
+              - openid
+              - profile
+              - email
+
 management:
   endpoint:
     shutdown:
