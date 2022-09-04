@@ -5,8 +5,9 @@ spring:
   session:
     store-type: redis
     redis:
-      host: redis-session
+      host: localhost
       port: 6379
+
   cloud:
     gateway:
       default-filters:
