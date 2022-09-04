@@ -32,8 +32,6 @@ spring:
             issuer-uri: ${KEYCLOAK_URL:http://localhost:8080}/realms/edge-service-realm
         registration:
           keycloak:
-            redirect-uri: '{baseUrl}/login/oauth2/code/keycloak'
-            authorization-grant-type: authorization_code
             clientId: ${spring.application.name}
             clientSecret: ${KEYCLOAK_CLIENT_SECRET}
             scope: openid

@@ -4,9 +4,10 @@ server:
 spring:
   session:
     store-type: redis
-    redis:
-      host: redis
-      port: ${REDIS_PORT:6379}
+  redis:
+    host: ${REDIS_HOST:redis}
+    port: ${REDIS_PORT:6379}
+
   cloud:
     gateway:
       default-filters:
@@ -34,7 +35,6 @@ spring:
             clientId: ${spring.application.name}
             clientSecret: ${KEYCLOAK_CLIENT_SECRET}
             scope: openid
-
 management:
   endpoint:
     shutdown:

@@ -1,4 +1,4 @@
-version: "3.5"
+version: "3.8"
 
 networks:
   backend:
@@ -10,6 +10,7 @@ volumes:
     driver: local
 
 services:
+  # Service Applications
   config-service:
     image: ghcr.io/volalm15/config-service:latest
     container_name: config-service
@@ -58,6 +59,7 @@ services:
       mode: replicated
       replicas: 2
 
+  # Session Applications
   redis:
     image: redis
     restart: unless-stopped
@@ -68,12 +70,11 @@ services:
     ports:
       - "6379:6379"
 
+  # Security Applications
   postgres:
     image: postgres
     container_name: postgres
     restart: unless-stopped
-    env_file:
-      - prod.env
     volumes:
       - ./postgres_data:/var/lib/postgresql/data
     networks:
@@ -89,10 +90,10 @@ services:
     hostname: keycloak
     restart: unless-stopped
     command: start --db=postgres
-    env_file:
-      - prod.env
     networks:
-      - backend
+      backend:
+        aliases:
+          - keycloak
     environment:
       KC_DB: postgres
       KC_DB_URL: jdbc:postgresql://postgres/keycloak
