@@ -58,9 +58,9 @@ services:
       mode: replicated
       replicas: 2
 
-  redis-session:
-    image: redis:alpine
-    hostname: redis
+  redis:
+    image: redis
+    container_name: redis-session
     restart: unless-stopped
     env_file:
       - prod.env
