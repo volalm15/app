@@ -17,7 +17,7 @@ This is a playground for Spring Cloud. It is a simple web application that allow
 After cloning the repository, you can run the application using the following command:
 `docker compose --env-file prod.env up`
 
-Don't forget to set the environment variables in the `prod.env` file. You can find the list of required variables in the `prod.env` example file.
+Don't forget to set the environment variables in the `prod.env` file. You can find the list of required variables in the `prod.env.example` example file.
 
 
 ## Available environment variables for deployment provided by microservices
