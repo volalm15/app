@@ -6,7 +6,7 @@ spring:
     oauth2:
       resource-server:
         jwt:
-          issuer-uri: ${OAUTH2_ISSUER_URI}
+          issuer-uri: ${OAUTH2_ISSUER_URI:https://vollify.eu.auth0.com/}
 
 management:
   endpoint:

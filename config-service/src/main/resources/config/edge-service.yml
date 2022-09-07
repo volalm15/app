@@ -3,10 +3,12 @@ server:
 
 
 spring:
+  main:
+    web-application-type: reactive
   session:
     store-type: redis
   redis:
-    host: ${REDIS_HOST:redis}
+    host: ${REDIS_HOST:localhost}
     port: ${REDIS_PORT:6379}
 
   cloud:
@@ -30,7 +32,7 @@ spring:
       client:
         provider:
           auth0:
-            issuer-uri: ${OAUTH2_ISSUER_URI}
+            issuer-uri: ${OAUTH2_ISSUER_URI:https://vollify.eu.auth0.com/}
         registration:
           auth0:
             provider: auth0
@@ -38,8 +40,8 @@ spring:
             clientSecret: ${OAUTH2_CLIENT_SECRET}
             scope:
               - openid
-              - profile
-              - email
+              - books
+              - read:admin-messages
 
 management:
   endpoint:
@@ -51,3 +53,12 @@ management:
     web:
       exposure:
         include: '*'
+
+logging:
+  level:
+    org:
+      springframework:
+        security: TRACE
+
+auth0:
+  audience: http://localhost:8761/data-sevice/
