@@ -3,11 +3,13 @@ server:
 
 
 spring:
-  session:
-    store-type: redis
-  redis:
-    host: ${REDIS_HOST:localhost}
-    port: ${REDIS_PORT:6379}
+  main:
+    web-application-type: reactive
+  #session:
+  #  store-type: redis
+  #redis:
+  #  host: ${REDIS_HOST:localhost}
+  #  port: ${REDIS_PORT:6379}
 
   cloud:
     gateway:
@@ -38,9 +40,6 @@ spring:
             clientSecret: ${OAUTH2_CLIENT_SECRET}
             scope:
               - openid
-              - profile
-              - email
-
 management:
   endpoint:
     shutdown:
@@ -51,3 +50,12 @@ management:
     web:
       exposure:
         include: '*'
+
+logging:
+  level:
+    org:
+      springframework:
+        security: TRACE
+
+auth0:
+  audience: ${OAUTH2_DATA_SERVICE_AUDIENCE:http://localhost:8761/data-service}
