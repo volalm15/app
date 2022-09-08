@@ -18,11 +18,4 @@ management:
         include: '*'
 
 auth0:
-  audience: http://localhost:8761/data-sevice
-
-# Logging
-logging:
-  level:
-    org:
-      springframework:
-        security: TRACE
+  audience: ${OAUTH2_DATA_SERVICE_AUDIENCE:http://localhost:8761/data-service}

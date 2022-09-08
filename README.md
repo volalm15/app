@@ -18,7 +18,7 @@ After cloning the repository, you can run the application using the following co
 `docker compose --env-file prod.env up`
 
 Don't forget to set the environment variables in the `prod.env` file. You can find the list of required variables in the `prod.env.example` example file.
-
+OAUTH2_DATA_SERVICE_AUDIENCE:http://localhost:8761/data-service
 
 ## Available environment variables for deployment provided by microservices
 | Variable                         | Description                                | Default value                                                             | Service                    |
@@ -28,6 +28,7 @@ Don't forget to set the environment variables in the `prod.env` file. You can fi
 | OAUTH2_ISSUER_URI                | url to oauth2 instance                     | http://localhost:8080                                                     | edge-service, data-service |
 | OAUTH2_CLIENT_SECRET             | secret of oauth2 client                    | -                                                                         | edge-service               |
 | OAUTH2_CLIENT_ID                 | id of oauth2 client                        | always spring.application.name                                            | edge-service               |
+| OAUTH2_DATA_SERVICE_AUDIENCE     | audience of data-service                   | http://localhost:8761/data-service                                        | edge-service, data-service |
 | REDIS_URL                        | url for redis instance                     | localhost                                                                 | edge-service               |
 | REDIS_PORT                       | port for redis instance                    | 6379                                                                      | edge-service               |
 | -                                |                                            |                                                                           |                            |

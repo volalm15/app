@@ -67,8 +67,13 @@ public class SecurityConfig {
   @Bean
   public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http, ReactiveClientRegistrationRepository clientRegistrationRepository) {
     // @formatter:off
-    http.authorizeExchange().anyExchange().authenticated();
-    http.oauth2Login(oauth2 -> oauth2.authorizationRequestResolver(authorizationRequestResolver(clientRegistrationRepository)));
+    http
+      .authorizeExchange()
+      .anyExchange()
+      .authenticated();
+
+    http
+      .oauth2Login(oauth2 -> oauth2.authorizationRequestResolver(authorizationRequestResolver(clientRegistrationRepository)));
 
     http.oauth2Client();
     // @formatter:on
@@ -90,7 +95,7 @@ public class SecurityConfig {
   private Consumer<OAuth2AuthorizationRequest.Builder> authorizationRequestCustomizer() {
     return customizer ->
       customizer.authorizationRequestUri(uriBuilder ->
-        uriBuilder.queryParam("audience", "http://localhost:8761/data-service").build()
+        uriBuilder.queryParam("audience", audience).build()
       );
   }
 }
