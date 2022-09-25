@@ -1,77 +1,57 @@
 package com.vollify.dataservice.config;
 
-import org.springframework.beans.factory.annotation.Value;
+import java.util.Collection;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
-import org.springframework.security.oauth2.core.OAuth2TokenValidator;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.JwtDecoders;
-import org.springframework.security.oauth2.jwt.JwtValidators;
-import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
-import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
-import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.oauth2.server.resource.authentication.ReactiveJwtAuthenticationConverter;
+import org.springframework.security.oauth2.server.resource.authentication.ReactiveJwtGrantedAuthoritiesConverterAdapter;
+import org.springframework.security.web.server.SecurityWebFilterChain;
 
 /**
  * @author : Alois Vollmaier (A199165)
- * @since : 02.09.2022, Fri
+ * @since : 20.09.2022, Tue
  **/
 
-@EnableWebSecurity
+@EnableWebFluxSecurity
 public class SecurityConfig {
 
-  @Value("${auth0.audience}")
-  private String audience;
-
-  @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
-  private String issuerUri;
-
   @Bean
-  public SecurityFilterChain filterChain(HttpSecurity http)
-    throws Exception {
+  SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
 
-    // @formatter:off
-    http
-      .authorizeRequests()
-      .mvcMatchers("/api/v1/books").hasAuthority("read:admin-messages")
-      .and()
-      .oauth2ResourceServer()
-      .jwt()
-      .decoder(jwtDecoder())
-      .jwtAuthenticationConverter(jwtAuthenticationConverter());
-    // @formatter:on
-
-    return http.build();
+    return http.authorizeExchange(
+        exchanges -> exchanges.pathMatchers("/books").hasRole("moderator").anyExchange().authenticated())
+      .oauth2ResourceServer(
+        oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverterForKeycloak())))
+      .build();
   }
 
-  @Bean
-  JwtDecoder jwtDecoder() {
-    NimbusJwtDecoder jwtDecoder = JwtDecoders.fromOidcIssuerLocation(issuerUri);
+  /**
+   * By default, Keycloak assigns user roles to a "roles" object within the "realm_access" claim.
+   * This converter extracts the list of user roles from "realm.access.roles" and builds
+   * a list of GrantedAuthority using the "ROLE_" prefix.
+   */
+  private ReactiveJwtAuthenticationConverter jwtAuthenticationConverterForKeycloak() {
+    Converter<Jwt, Collection<GrantedAuthority>> jwtGrantedAuthoritiesConverter = jwt -> {
+      Map<String, Collection<String>> realmAccess = jwt.getClaim("realm_access");
+      Collection<String> roles = realmAccess.get("roles");
+      return roles.stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+        .collect(Collectors.toList());
+    };
 
-    OAuth2TokenValidator<Jwt> audienceValidator = new AudienceValidator(audience);
-    OAuth2TokenValidator<Jwt> withIssuer = JwtValidators.createDefaultWithIssuer(issuerUri);
-    OAuth2TokenValidator<Jwt> withAudience =
-      new DelegatingOAuth2TokenValidator<>(withIssuer, audienceValidator);
+    var jwtAuthenticationConverter = new ReactiveJwtAuthenticationConverter();
+    jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(
+      new ReactiveJwtGrantedAuthoritiesConverterAdapter(jwtGrantedAuthoritiesConverter));
 
-    jwtDecoder.setJwtValidator(withAudience);
-
-    return jwtDecoder;
-  }
-
-  private JwtAuthenticationConverter jwtAuthenticationConverter() {
-    JwtGrantedAuthoritiesConverter converter = new JwtGrantedAuthoritiesConverter();
-    converter.setAuthoritiesClaimName("permissions");
-    converter.setAuthorityPrefix("");
-
-    JwtAuthenticationConverter jwtConverter = new JwtAuthenticationConverter();
-    jwtConverter.setJwtGrantedAuthoritiesConverter(converter);
-    return jwtConverter;
+    return jwtAuthenticationConverter;
   }
 }
-
-
-
-
