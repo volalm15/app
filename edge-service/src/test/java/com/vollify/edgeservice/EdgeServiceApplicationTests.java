@@ -1,4 +1,4 @@
-package com.vollify.gatewayservice;
+package com.vollify.edgeservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

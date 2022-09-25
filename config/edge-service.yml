@@ -5,11 +5,11 @@ server:
 spring:
   main:
     web-application-type: reactive
-  #session:
-  #  store-type: redis
-  #redis:
-  #  host: ${REDIS_HOST:localhost}
-  #  port: ${REDIS_PORT:6379}
+  session:
+    store-type: redis
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
 
   cloud:
     gateway:
@@ -31,11 +31,11 @@ spring:
     oauth2:
       client:
         provider:
-          auth0:
-            issuer-uri: ${OAUTH2_ISSUER_URI:https://vollify.eu.auth0.com/}
+          keycloak:
+            issuer-uri: ${OAUTH2_ISSUER_URI:http://localhost:8080}/realms/edge-service-realm
         registration:
-          auth0:
-            provider: auth0
+          keycloak:
+            provider: keycloak
             clientId: ${OAUTH2_CLIENT_ID}
             clientSecret: ${OAUTH2_CLIENT_SECRET}
             scope:
@@ -56,6 +56,3 @@ logging:
     org:
       springframework:
         security: TRACE
-
-auth0:
-  audience: ${OAUTH2_DATA_SERVICE_AUDIENCE:http://localhost:8761/data-service}

@@ -6,7 +6,7 @@ spring:
     oauth2:
       resource-server:
         jwt:
-          issuer-uri: ${OAUTH2_ISSUER_URI:https://vollify.eu.auth0.com/}
+          issuer-uri: ${OAUTH2_ISSUER_URI:http://localhost:8080}/realms/edge-service-realm
 
 management:
   endpoint:
@@ -17,5 +17,8 @@ management:
       exposure:
         include: '*'
 
-auth0:
-  audience: ${OAUTH2_DATA_SERVICE_AUDIENCE:http://localhost:8761/data-service}
+logging:
+  level:
+    org:
+      springframework:
+        security: TRACE
