@@ -28,7 +28,9 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build docker image
-        run: docker build -t ghcr.io/volalm15/ui-app:latest -f ui-app/Dockerfile .
+        run: |
+          cd ui-app
+          docker build -t ghcr.io/volalm15/ui-app:latest -f ui-app/Dockerfile .
         
       - name: Publish docker image
         run: |
