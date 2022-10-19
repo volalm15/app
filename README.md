@@ -1,4 +1,4 @@
-# Spring Cloud Playground 
+# ⚡Spring Cloud Playground 
 
 ### Service Build Status 
 [![Build data-service](https://github.com/volalm15/app/actions/workflows/data-service.yml/badge.svg?branch=main)](https://github.com/volalm15/app/actions/workflows/data-service.yml)
