@@ -1,4 +1,4 @@
-name: Build config-service
+name: Build ui-app
 on:
   push:
     branches: [ main ]
