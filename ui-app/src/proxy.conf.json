@@ -1,0 +1,7 @@
+{
+  "/data-service/*": {
+    "target": "localhost:8761",
+    "secure": false,
+    "logLevel": "debug"
+  }
+}

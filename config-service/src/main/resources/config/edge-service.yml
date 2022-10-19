@@ -8,12 +8,21 @@ spring:
   session:
     store-type: redis
   redis:
-    host: ${REDIS_HOST:localhost}
-    port: ${REDIS_PORT:6379}
+    host: localhost
+    port: 6379
 
   cloud:
     gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
       default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+        - AddResponseHeader=Access-Control-Allow-Origin, *
         - name: Retry
           args:
             retries: 15
@@ -21,7 +30,6 @@ spring:
               firstBackoff: 50ms
               maxBackoff: 500ms
         - name: TokenRelay
-        - name: SaveSession
 
       discovery:
         locator:
@@ -33,7 +41,7 @@ spring:
       client:
         provider:
           keycloak:
-            issuer-uri: ${OAUTH2_ISSUER_URI:http://localhost:8080}/realms/edge-service-realm
+            issuer-uri: ${OAUTH2_ISSUER_URI:http://localhost:8080}/realms/${OAUTH2_REALM:edge-service-realm}
         registration:
           keycloak:
             provider: keycloak
