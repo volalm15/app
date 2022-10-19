@@ -30,7 +30,7 @@ jobs:
       - name: Build docker image
         run: |
           cd ui-app
-          docker build -t ghcr.io/volalm15/ui-app:latest -f ui-app/Dockerfile .
+          docker build -t ghcr.io/volalm15/ui-app:latest -f Dockerfile .
         
       - name: Publish docker image
         run: |
