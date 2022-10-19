@@ -30,7 +30,7 @@ jobs:
         run: ./gradlew :discovery-service:bootJar
 
       - name: Publish jar artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           path: discovery-service/build/libs/*.jar
 

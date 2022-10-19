@@ -30,7 +30,7 @@ jobs:
         run: ./gradlew :edge-service:bootJar
 
       - name: Publish jar artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           path: edge-service/build/libs/*.jar
 
