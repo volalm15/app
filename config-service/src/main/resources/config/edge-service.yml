@@ -17,12 +17,12 @@ spring:
         corsConfigurations:
           '[/**]':
             allowedOrigins: "*"
+            allowedHeaders: "*"
             allowedMethods:
               - GET
               - POST
+              - PUT
       default-filters:
-        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
-        - AddResponseHeader=Access-Control-Allow-Origin, *
         - name: Retry
           args:
             retries: 15
@@ -47,6 +47,7 @@ spring:
             provider: keycloak
             clientId: ${OAUTH2_CLIENT_ID}
             clientSecret: ${OAUTH2_CLIENT_SECRET}
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}/"
             scope:
               - openid
 management:

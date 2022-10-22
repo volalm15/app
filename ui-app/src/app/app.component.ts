@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
 
@@ -21,23 +21,29 @@ export class AppComponent implements OnInit {
   booksUrl: string;
 
   constructor(private http: HttpClient) {
-    this.booksUrl = 'http://localhost:8761/data-service/books/';
+    this.booksUrl = 'http://localhost:8761/data-service/books';
   }
 
   ngOnInit(): void {
   }
 
-  findAll(): void {
-    this.http.get(
-      this.booksUrl,
-      {observe: 'response', headers: {'Content-Type': 'application/json'}}
-    )
-      .subscribe(response => {
-        // You can access status:
-        console.log(response.status);
 
-        // Or any other header:
-        console.log(response.headers.get(''));
+  findAll(): void {
+    fetch(this.booksUrl, {
+      method: 'GET',
+      mode: 'no-cors',
+    })
+      .then((response) => {
+        console.log(response);
+        if (response.redirected) {
+          window.location.href = response.url;
+        }
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error(error);
       });
-  }
+  };
 }
