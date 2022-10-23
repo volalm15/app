@@ -3,11 +3,6 @@ server:
 
 
 spring:
-  zipkin:
-    base-url: http://zipkin-server:9411
-  sleuth:
-    sampler:
-      probability: 1.0
   main:
     web-application-type: reactive
   session:
@@ -18,6 +13,15 @@ spring:
 
   cloud:
     gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeaders: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
       default-filters:
         - name: Retry
           args:
@@ -43,6 +47,7 @@ spring:
             provider: keycloak
             clientId: ${OAUTH2_CLIENT_ID}
             clientSecret: ${OAUTH2_CLIENT_SECRET}
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}/"
             scope:
               - openid
 management:
@@ -60,4 +65,4 @@ logging:
   level:
     org:
       springframework:
-        security: TRACE
+        security: DEBUG

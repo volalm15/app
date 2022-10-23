@@ -2,11 +2,6 @@ server:
   port: 8762
 
 spring:
-  zipkin:
-    base-url: http://zipkin-server:9411
-  sleuth:
-    sampler:
-      probability: 1.0
   security:
     oauth2:
       resource-server:
@@ -21,3 +16,9 @@ management:
     web:
       exposure:
         include: '*'
+
+logging:
+  level:
+    org:
+      springframework:
+        security: TRACE

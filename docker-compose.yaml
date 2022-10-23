@@ -24,7 +24,7 @@ services:
     logging:
       driver: fluentd
       options:
-        fluentd-address: fluent-bit:24224
+        fluentd-address: localhost:24224
     depends_on:
       - fluent-bit
       - keycloak
@@ -42,7 +42,7 @@ services:
     logging:
       driver: fluentd
       options:
-        fluentd-address: fluent-bit:24224
+        fluentd-address: localhost:24224
     depends_on:
       - fluent-bit
       - keycloak
@@ -60,7 +60,7 @@ services:
     logging:
       driver: fluentd
       options:
-        fluentd-address: fluent-bit:24224
+        fluentd-address: localhost:24224
     depends_on:
       - fluent-bit
       - keycloak
@@ -77,7 +77,7 @@ services:
     logging:
       driver: fluentd
       options:
-        fluentd-address: fluent-bit:24224
+        fluentd-address: localhost:24224
     depends_on:
       - fluent-bit
       - keycloak
