@@ -4,12 +4,29 @@ networks:
   backend:
     name: backend
     driver: bridge
+  frontend:
+    name: frontend
+    driver: bridge
 
 volumes:
   postgres_data:
     driver: local
 
 services:
+  ui-app:
+    image: ghcr.io/volalm15/ui-app:latest
+    container_name: ui-app
+    restart: unless-stopped
+    networks:
+      - frontend
+    ports:
+      - "4200:4200"
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: localhost:24224
+    depends_on:
+      - fluent-bit
   # Service Applications
   config-service:
     image: ghcr.io/volalm15/config-service:latest
@@ -100,6 +117,8 @@ services:
       - ./postgres_data:/var/lib/postgresql/data
     networks:
       - backend
+    env_file:
+      - prod.env
     environment:
       POSTGRES_DB: keycloak
       POSTGRES_USER: ${KEYCLOAK_POSTGRES_USER}
@@ -111,10 +130,10 @@ services:
     hostname: keycloak
     restart: unless-stopped
     command: start --db=postgres
+    env_file:
+      - prod.env
     networks:
-      backend:
-        aliases:
-          - keycloak
+      - backend
     environment:
       KC_DB: postgres
       KC_DB_URL: jdbc:postgresql://postgres/keycloak
