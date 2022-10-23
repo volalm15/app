@@ -38,3 +38,9 @@ services:
       - "8080:8080"
     depends_on:
       -   postgres
+
+  zipkin-server:
+    image: openzipkin/zipkin
+    container_name: zipkin-server
+    ports:
+      - '9411:9411'

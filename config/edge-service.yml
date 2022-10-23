@@ -3,6 +3,11 @@ server:
 
 
 spring:
+  zipkin:
+    base-url: http://zipkin-server:9411
+  sleuth:
+    sampler:
+      probability: 1.0
   main:
     web-application-type: reactive
   session:

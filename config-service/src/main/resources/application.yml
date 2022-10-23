@@ -1,6 +1,12 @@
 server:
   port: 8760
+
 spring:
+  zipkin:
+    base-url: http://zipkin-server:9411
+  sleuth:
+    sampler:
+      probability: 1.0
   application:
     name: config-service
   profiles:
