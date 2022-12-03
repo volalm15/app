@@ -37,23 +37,44 @@ import reactor.core.publisher.Mono;
 public class SecurityConfig {
 
   @Autowired
-  private ReactiveClientRegistrationRepository clientRegistrationRepository;
+  private  ReactiveClientRegistrationRepository clientRegistrationRepository;
 
   @Bean
   SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
     return http
       .csrf().disable()
       .authorizeExchange(exchange -> exchange.matchers(EndpointRequest.toAnyEndpoint()).permitAll()
+        .pathMatchers("/", "/*.css", "/*.js", "/favicon.ico").permitAll()
         .anyExchange().authenticated())
-      .oauth2Login(oauth2 -> oauth2.clientRegistrationRepository(clientRegistrationRepository))
-      .logout(logout -> logout.logoutSuccessHandler(oidcLogoutSuccessHandler()))
+      .oauth2Login(Customizer.withDefaults())
+      .logout(logout -> logout.logoutSuccessHandler(oidcLogoutSuccessHandler(clientRegistrationRepository)))
+      .csrf(csrf -> csrf.csrfTokenRepository(CookieServerCsrfTokenRepository.withHttpOnlyFalse()))
       .build();
   }
 
-  private ServerLogoutSuccessHandler oidcLogoutSuccessHandler() {
-    OidcClientInitiatedServerLogoutSuccessHandler oidcLogoutSuccessHandler =
-      new OidcClientInitiatedServerLogoutSuccessHandler(this.clientRegistrationRepository);
+
+  private ServerLogoutSuccessHandler oidcLogoutSuccessHandler(ReactiveClientRegistrationRepository clientRegistrationRepository) {
+    var oidcLogoutSuccessHandler = new OidcClientInitiatedServerLogoutSuccessHandler(clientRegistrationRepository);
     oidcLogoutSuccessHandler.setPostLogoutRedirectUri("{baseUrl}");
     return oidcLogoutSuccessHandler;
   }
+
+  @Bean
+  ServerOAuth2AuthorizedClientRepository oAuth2AuthorizedClientRepository() {
+    return new WebSessionServerOAuth2AuthorizedClientRepository();
+  }
+
+  @Bean
+  WebFilter csrfWebFilter() {
+    // Required because of https://github.com/spring-projects/spring-security/issues/5766
+    return (exchange, chain) -> {
+      exchange.getResponse().beforeCommit(() -> Mono.defer(() -> {
+        Mono<CsrfToken> csrfToken = exchange.getAttribute(CsrfToken.class.getName());
+        return csrfToken != null ? csrfToken.then() : Mono.empty();
+      }));
+      return chain.filter(exchange);
+    };
+  }
+
+
 }

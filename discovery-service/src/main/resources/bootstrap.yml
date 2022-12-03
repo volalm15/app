@@ -3,7 +3,7 @@ server:
 
 spring:
   zipkin:
-    base-url: http://zipkin-server:9411
+    base-url: ${ZIPKIN_HOSTNAME:http://localhost:9411}
   sleuth:
     sampler:
       probability: 1.0

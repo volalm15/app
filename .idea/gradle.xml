@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/data-service" />
             <option value="$PROJECT_DIR$/discovery-service" />
             <option value="$PROJECT_DIR$/edge-service" />
+            <option value="$PROJECT_DIR$/ui-app" />
           </set>
         </option>
       </GradleProjectSettings>

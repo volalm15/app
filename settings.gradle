@@ -10,5 +10,7 @@ include ':discovery-service'
 include ':edge-service'
 include ':config-service'
 include ':data-service'
+include ':ui-app'
+
 
 

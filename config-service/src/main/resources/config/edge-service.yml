@@ -8,20 +8,11 @@ spring:
   session:
     store-type: redis
   redis:
-    host: localhost
-    port: 6379
+    host: ${REDIS_HOSTNAME:localhost}
+    port: ${REDIS_PORT:6379}
 
   cloud:
     gateway:
-      globalcors:
-        corsConfigurations:
-          '[/**]':
-            allowedOrigins: "*"
-            allowedHeaders: "*"
-            allowedMethods:
-              - GET
-              - POST
-              - PUT
       default-filters:
         - name: Retry
           args:
@@ -30,6 +21,7 @@ spring:
               firstBackoff: 50ms
               maxBackoff: 500ms
         - name: TokenRelay
+        - name: SaveSession
 
       discovery:
         locator:
@@ -47,7 +39,6 @@ spring:
             provider: keycloak
             clientId: ${OAUTH2_CLIENT_ID}
             clientSecret: ${OAUTH2_CLIENT_SECRET}
-            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}/"
             scope:
               - openid
 management:

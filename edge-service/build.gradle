@@ -49,3 +49,16 @@ dependencyManagement {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+processResources {
+    dependsOn 'compileFrontend'
+   // copy from ui-app dist folder to resources/static
+    from('ui-app/dist/ui-app') {
+        into 'static'
+    }
+}
+
+task compileFrontend(type: GradleBuild) {
+    dir = '../ui-app'
+    tasks = ['buildAngular']
+}

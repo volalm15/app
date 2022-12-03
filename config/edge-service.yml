@@ -8,8 +8,8 @@ spring:
   session:
     store-type: redis
   redis:
-    host: localhost
-    port: 6379
+    host: ${REDIS_HOSTNAME:localhost}
+    port: ${REDIS_PORT:6379}
 
   cloud:
     gateway:

@@ -27,6 +27,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 
@@ -40,6 +43,7 @@ public class DataServiceApplication {
   record Book(String title) {
   }
 
+  @Data
   @RestController
   @Slf4j
   static class BookController {
@@ -51,7 +55,10 @@ public class DataServiceApplication {
         new Book("Harry Potter"),
         new Book("His Dark Materials"),
         new Book("The Hobbit"),
-        new Book("The Lord of the Rings")
+        new Book("The Lord of the Rings"),
+        new Book("The Chronicles of Narnia"),
+        new Book("The Silmarillion"),
+        new Book("The Hitchhiker's Guide to the Galaxy")
       );
     }
 
